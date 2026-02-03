@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+
+# FastAPI
+.env
+.env.local
+
+# Video uploads
+uploads/
+temp/
+*.mp4
+*.mov
+*.avi
+
+# Node
+node_modules/
+.next/
+out/
+.DS_Store
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
