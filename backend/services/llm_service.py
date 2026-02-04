@@ -117,12 +117,14 @@ Be specific, actionable, and reference timestamps when relevant."""
     def _call_ollama(self, prompt: str) -> Dict[str, Any]:
         """Call Ollama API"""
         try:
+            print(f"🤖 Calling Ollama with model: {self.model}")
+            
             response = ollama.chat(
                 model=self.model,
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are a video optimization expert. Always respond with valid JSON only."
+                        "content": "You are a video optimization expert. Always respond with valid JSON only. No markdown, no explanations, just pure JSON."
                     },
                     {
                         "role": "user",
@@ -133,6 +135,7 @@ Be specific, actionable, and reference timestamps when relevant."""
             
             # Parse JSON response
             content = response['message']['content']
+            print(f"📝 Raw LLM response: {content[:200]}...")
             
             # Extract JSON from markdown code blocks if present
             if "```json" in content:
@@ -140,11 +143,50 @@ Be specific, actionable, and reference timestamps when relevant."""
             elif "```" in content:
                 content = content.split("```")[1].split("```")[0].strip()
             
-            return json.loads(content)
+            # Parse JSON
+            result = json.loads(content)
+            print(f"✅ Successfully parsed JSON response")
+            
+            # Validate required fields
+            if not all(key in result for key in ['platform', 'overall_score', 'video', 'audio', 'content']):
+                raise ValueError("Missing required fields in LLM response")
+            
+            return result
+        
+        except json.JSONDecodeError as e:
+            print(f"❌ JSON parsing error: {str(e)}")
+            print(f"📄 Content that failed to parse: {content}")
+            return self._get_fallback_response("JSON parsing failed")
         
         except Exception as e:
-            return {
-                "error": f"LLM analysis failed: {str(e)}",
-                "platform": "unknown",
-                "overall_score": 0
-            }
+            print(f"❌ LLM call failed: {str(e)}")
+            return self._get_fallback_response(str(e))
+    
+    def _get_fallback_response(self, error_msg: str) -> Dict[str, Any]:
+        """Return a properly structured fallback response when LLM fails"""
+        return {
+            "platform": "unknown",
+            "overall_score": 5.0,
+            "video": {
+                "score": 5.0,
+                "issues": ["Unable to analyze video quality - LLM error"],
+                "suggestions": ["Please try again or check backend logs"]
+            },
+            "audio": {
+                "score": 5.0,
+                "issues": ["Unable to analyze audio quality - LLM error"],
+                "suggestions": ["Please try again or check backend logs"]
+            },
+            "content": {
+                "score": 5.0,
+                "hook_score": 5.0,
+                "has_cta": False,
+                "issues": ["Unable to analyze content - LLM error"],
+                "suggestions": ["Please try again or check backend logs"]
+            },
+            "top_3_priorities": [
+                f"LLM Error: {error_msg}",
+                "Check if Ollama is running: ollama serve",
+                "Check if model is downloaded: ollama list"
+            ]
+        }

@@ -44,6 +44,12 @@ async def analyze_video(
     """
     Analyze uploaded video and return optimization suggestions
     """
+    print(f"\n{'='*60}")
+    print(f"🎬 New video analysis request")
+    print(f"📱 Platform: {platform}")
+    print(f"📹 File: {video.filename}")
+    print(f"{'='*60}\n")
+    
     if platform not in ["instagram", "youtube_shorts", "other"]:
         raise HTTPException(status_code=400, detail="Invalid platform")
     
@@ -54,36 +60,57 @@ async def analyze_video(
     # Save video temporarily
     video_path = UPLOAD_DIR / f"temp_{video.filename}"
     try:
+        print("💾 Saving video...")
         with open(video_path, "wb") as buffer:
             shutil.copyfileobj(video.file, buffer)
+        print(f"✅ Video saved to {video_path}")
         
         # Initialize analyzers
+        print("\n🔧 Initializing analyzers...")
         video_analyzer = VideoAnalyzer(str(video_path))
         audio_analyzer = AudioAnalyzer(str(video_path))
         content_analyzer = ContentAnalyzer(str(video_path))
         llm_service = LLMService()
         
         # Run analysis
+        print("\n🎥 Analyzing video...")
         video_metrics = video_analyzer.analyze()
+        print(f"✅ Video metrics: {video_metrics}")
+        
+        print("\n🔊 Analyzing audio...")
         audio_metrics = audio_analyzer.analyze()
+        print(f"✅ Audio metrics: {audio_metrics}")
+        
+        print("\n📝 Transcribing content...")
         transcript = content_analyzer.transcribe()
+        print(f"✅ Transcript: {transcript.get('text', 'No speech')[:100]}...")
         
         # Get LLM insights
+        print("\n🤖 Generating AI suggestions...")
         suggestions = llm_service.generate_suggestions(
             video_metrics=video_metrics,
             audio_metrics=audio_metrics,
             transcript=transcript,
             platform=platform
         )
+        print(f"✅ Suggestions generated: {suggestions.get('overall_score', 'N/A')}")
+        
+        print(f"\n{'='*60}")
+        print("✨ Analysis complete!")
+        print(f"{'='*60}\n")
         
         return JSONResponse(content=suggestions)
     
     except Exception as e:
+        print(f"\n❌ ERROR: {str(e)}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
     
     finally:
         # Cleanup
         if video_path.exists():
+            print(f"🗑️  Cleaning up {video_path}")
             video_path.unlink()
 
 if __name__ == "__main__":
