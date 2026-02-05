@@ -10,6 +10,7 @@ from services.video_analyzer import VideoAnalyzer
 from services.audio_analyzer import AudioAnalyzer
 from services.content_analyzer import ContentAnalyzer
 from services.llm_service import LLMService
+from services.thumbnail_suggester import ThumbnailSuggester
 
 load_dotenv()
 
@@ -94,6 +95,17 @@ async def analyze_video(
             platform=platform
         )
         print(f"✅ Suggestions generated: {suggestions.get('overall_score', 'N/A')}")
+        
+        # Generate thumbnail suggestions
+        print("\n🖼️  Generating thumbnail suggestions...")
+        try:
+            thumbnail_suggester = ThumbnailSuggester(str(video_path), platform)
+            thumbnail_suggestions = thumbnail_suggester.generate_suggestions(num_suggestions=5)
+            suggestions['thumbnail_suggestions'] = thumbnail_suggestions
+            print(f"✅ Generated {len(thumbnail_suggestions)} thumbnail suggestions")
+        except Exception as e:
+            print(f"⚠️  Thumbnail generation failed: {str(e)}")
+            suggestions['thumbnail_suggestions'] = []
         
         print(f"\n{'='*60}")
         print("✨ Analysis complete!")

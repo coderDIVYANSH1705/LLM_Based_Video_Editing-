@@ -1,8 +1,22 @@
 'use client'
 
 import { ArrowLeft, Video, Volume2, FileText, AlertCircle, TrendingUp, CheckCircle2, XCircle } from 'lucide-react'
+import ThumbnailGallery from './ThumbnailGallery'
+import MusicRecommendationCard from './MusicRecommendationCard'
+import HashtagTitleSuggestions from './HashtagTitleSuggestions'
 
 export default function ResultsDashboard({ results, onReset }: any) {
+  // Debug logging
+  console.log('🔍 ResultsDashboard received:', {
+    has_music: !!results.music_recommendation,
+    has_hashtags: !!results.hashtag_suggestions,
+    has_titles: !!results.title_suggestions,
+    has_thumbnails: !!results.thumbnail_suggestions,
+    music_data: results.music_recommendation,
+    hashtags_data: results.hashtag_suggestions,
+    titles_data: results.title_suggestions
+  })
+
   const getScoreColor = (score: number) => {
     if (score >= 8) return { text: 'text-emerald-400', bg: 'bg-emerald-500/20', border: 'border-emerald-500/50', glow: 'from-emerald-600 to-emerald-400' }
     if (score >= 6) return { text: 'text-amber-400', bg: 'bg-amber-500/20', border: 'border-amber-500/50', glow: 'from-amber-600 to-amber-400' }
@@ -93,6 +107,32 @@ export default function ResultsDashboard({ results, onReset }: any) {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Music Recommendation */}
+      {results.music_recommendation ? (
+        <MusicRecommendationCard recommendation={results.music_recommendation} />
+      ) : (
+        <div className="p-4 bg-yellow-500/10 rounded-lg border border-yellow-500/20">
+          <p className="text-sm text-yellow-400">⚠️ Music recommendation not available</p>
+        </div>
+      )}
+
+      {/* Hashtag and Title Suggestions */}
+      {(results.hashtag_suggestions || results.title_suggestions) ? (
+        <HashtagTitleSuggestions 
+          hashtags={results.hashtag_suggestions || []} 
+          titles={results.title_suggestions || []} 
+        />
+      ) : (
+        <div className="p-4 bg-yellow-500/10 rounded-lg border border-yellow-500/20">
+          <p className="text-sm text-yellow-400">⚠️ Hashtag and title suggestions not available</p>
+        </div>
+      )}
+
+      {/* Thumbnail Suggestions */}
+      {results.thumbnail_suggestions && results.thumbnail_suggestions.length > 0 && (
+        <ThumbnailGallery thumbnails={results.thumbnail_suggestions} />
       )}
 
       {/* Detailed Scores Grid */}

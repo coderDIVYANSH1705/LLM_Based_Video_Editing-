@@ -18,13 +18,16 @@ class AudioAnalyzer:
             # Load with librosa
             y, sr = librosa.load(audio_path, sr=None)
             
+            loudness_data = self._analyze_loudness(y)
+            
             metrics = {
                 "duration": len(y) / sr,
                 "sample_rate": sr,
-                "loudness": self._analyze_loudness(y),
+                "loudness": loudness_data,
                 "silence_gaps": self._detect_silence_gaps(audio_path),
                 "noise_level": self._estimate_noise(y),
-                "has_audio": len(y) > 0
+                "has_audio": len(y) > 0,
+                "is_silent_or_low": self._is_silent_or_low_audio(loudness_data)
             }
             
             # Cleanup
@@ -80,3 +83,8 @@ class AudioAnalyzer:
             "spectral_flatness": float(avg_flatness),
             "has_noise": avg_flatness > 0.5
         }
+    
+    def _is_silent_or_low_audio(self, loudness_data: dict) -> bool:
+        """Check if video has no audio or very low audio levels (below -40dB)"""
+        avg_db = loudness_data.get('average_db', -100)
+        return avg_db < -40
