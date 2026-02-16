@@ -71,9 +71,9 @@ export default function UploadSection({ onResults, loading, setLoading }: any) {
   }
 
   const platforms = [
-    { id: 'instagram', name: 'Instagram', icon: Instagram, color: 'from-pink-500 to-purple-500' },
-    { id: 'youtube_shorts', name: 'YouTube Shorts', icon: Youtube, color: 'from-red-500 to-red-600' },
-    { id: 'other', name: 'Other', icon: Film, color: 'from-blue-500 to-cyan-500' }
+    { id: 'instagram', name: 'Instagram', icon: Instagram, color: 'from-blue-500 to-blue-600' },
+    { id: 'youtube_shorts', name: 'YouTube Shorts', icon: Youtube, color: 'from-blue-600 to-cyan-600' },
+    { id: 'other', name: 'Other', icon: Film, color: 'from-cyan-500 to-blue-500' }
   ]
 
   return (
@@ -89,16 +89,16 @@ export default function UploadSection({ onResults, loading, setLoading }: any) {
         }`}
       >
         {/* Glow Effect */}
-        <div className={`absolute -inset-1 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600 rounded-2xl blur-xl transition-opacity duration-300 ${
+        <div className={`absolute -inset-1 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 rounded-2xl blur-xl transition-opacity duration-300 ${
           dragActive ? 'opacity-60' : 'opacity-20 group-hover:opacity-40'
         }`}></div>
         
-        <div className={`relative bg-slate-800/50 backdrop-blur-xl rounded-2xl border transition-all duration-300 ${
+        <div className={`relative bg-white/90 backdrop-blur-xl rounded-2xl border transition-all duration-300 ${
           dragActive 
-            ? 'border-violet-500 bg-violet-500/10' 
+            ? 'border-blue-500 bg-blue-500/10' 
             : file
             ? 'border-emerald-500/50 bg-emerald-500/5'
-            : 'border-white/10 hover:border-white/20'
+            : 'border-blue-200 hover:border-blue-300'
         }`}>
           <input
             type="file"
@@ -119,10 +119,10 @@ export default function UploadSection({ onResults, loading, setLoading }: any) {
                   </div>
                 ) : (
                   <div className="relative">
-                    <div className={`absolute inset-0 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-full blur-2xl transition-opacity ${
+                    <div className={`absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-2xl transition-opacity ${
                       dragActive ? 'opacity-60' : 'opacity-30'
                     }`}></div>
-                    <Upload className={`relative h-20 w-20 text-slate-300 transition-transform duration-300 ${
+                    <Upload className={`relative h-20 w-20 text-blue-600 transition-transform duration-300 ${
                       dragActive ? 'scale-110 rotate-12' : 'group-hover:scale-105'
                     }`} />
                   </div>
@@ -133,11 +133,11 @@ export default function UploadSection({ onResults, loading, setLoading }: any) {
               <div className="text-center">
                 {file ? (
                   <>
-                    <p className="text-xl font-semibold text-white mb-2">{file.name}</p>
-                    <p className="text-sm text-slate-400">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                    <p className="text-xl font-semibold text-blue-900 mb-2">{file.name}</p>
+                    <p className="text-sm text-blue-600">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
                     <button
                       type="button"
-                      className="mt-3 text-sm text-violet-400 hover:text-violet-300 font-medium transition-colors"
+                      className="mt-3 text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors"
                       onClick={(e) => {
                         e.preventDefault()
                         setFile(null)
@@ -148,13 +148,13 @@ export default function UploadSection({ onResults, loading, setLoading }: any) {
                   </>
                 ) : (
                   <>
-                    <p className="text-xl font-semibold text-white mb-2">
+                    <p className="text-xl font-semibold text-blue-900 mb-2">
                       {dragActive ? 'Drop your video here' : 'Upload your video'}
                     </p>
-                    <p className="text-sm text-slate-400">
+                    <p className="text-sm text-blue-600">
                       Click to browse or drag and drop
                     </p>
-                    <p className="text-xs text-slate-500 mt-2">
+                    <p className="text-xs text-blue-500 mt-2">
                       MP4, MOV, AVI • Max 100MB • Up to 60 seconds
                     </p>
                   </>
@@ -167,7 +167,7 @@ export default function UploadSection({ onResults, loading, setLoading }: any) {
 
       {/* Platform Selection */}
       <div>
-        <label className="block text-sm font-semibold text-slate-300 mb-4">
+        <label className="block text-sm font-semibold text-blue-900 mb-4">
           Select Platform
         </label>
         <div className="grid grid-cols-3 gap-4">
@@ -181,8 +181,8 @@ export default function UploadSection({ onResults, loading, setLoading }: any) {
                 onClick={() => setPlatform(p.id)}
                 className={`relative group p-6 rounded-xl border transition-all duration-300 ${
                   isSelected
-                    ? 'border-white/20 bg-white/5 scale-105'
-                    : 'border-white/10 hover:border-white/20 hover:bg-white/5'
+                    ? 'border-blue-300 bg-blue-50 scale-105'
+                    : 'border-blue-200 hover:border-blue-300 hover:bg-blue-50/50'
                 }`}
               >
                 {/* Glow Effect */}
@@ -197,14 +197,14 @@ export default function UploadSection({ onResults, loading, setLoading }: any) {
                     <Icon className="h-6 w-6 text-white" />
                   </div>
                   <span className={`text-sm font-medium transition-colors ${
-                    isSelected ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'
+                    isSelected ? 'text-blue-900' : 'text-blue-600 group-hover:text-blue-700'
                   }`}>
                     {p.name}
                   </span>
                   
                   {/* Selection Indicator */}
                   {isSelected && (
-                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-full flex items-center justify-center">
+                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
                       <CheckCircle2 className="h-4 w-4 text-white" />
                     </div>
                   )}
@@ -238,13 +238,13 @@ export default function UploadSection({ onResults, loading, setLoading }: any) {
       >
         {/* Glow Effect */}
         {!loading && file && (
-          <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600 rounded-xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity"></div>
+          <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 rounded-xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity"></div>
         )}
         
         <div className={`relative py-4 px-6 rounded-xl font-semibold text-lg ${
           loading || !file
-            ? 'bg-slate-800 text-slate-500'
-            : 'bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600 text-white'
+            ? 'bg-blue-200 text-blue-400'
+            : 'bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 text-white'
         }`}>
           <span className="flex items-center justify-center gap-3">
             {loading ? (
@@ -264,13 +264,13 @@ export default function UploadSection({ onResults, loading, setLoading }: any) {
       </button>
 
       {/* Info Footer */}
-      <div className="flex items-center justify-center gap-6 text-xs text-slate-500">
+      <div className="flex items-center justify-center gap-6 text-xs text-blue-600">
         <div className="flex items-center gap-2">
           <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></div>
           <span>Secure</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-1.5 h-1.5 bg-violet-500 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+          <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
           <span>AI-Powered</span>
         </div>
         <div className="flex items-center gap-2">

@@ -98,15 +98,15 @@ export const FunLoadingAnimation: React.FC<FunLoadingAnimationProps> = ({
   const themes = {
     holographic: (
       <div className={`relative ${currentSize.container} ${className}`}>
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 rounded-3xl overflow-hidden shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-cyan-50 rounded-3xl overflow-hidden shadow-2xl border-2 border-blue-200">
           {/* Animated holographic background */}
-          <div className="absolute inset-0 opacity-60">
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20"
+          <div className="absolute inset-0 opacity-40">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-cyan-400/20 to-blue-500/20"
                  style={{ 
                    animation: 'holo-shift 8s ease-in-out infinite',
                    backgroundSize: '400% 400%'
                  }} />
-            <div className="absolute inset-0 bg-gradient-to-tl from-blue-500/20 via-pink-500/20 to-yellow-500/20"
+            <div className="absolute inset-0 bg-gradient-to-tl from-cyan-500/20 via-blue-400/20 to-blue-600/20"
                  style={{ 
                    animation: 'holo-shift 10s ease-in-out infinite reverse',
                    backgroundSize: '400% 400%',
@@ -115,9 +115,9 @@ export const FunLoadingAnimation: React.FC<FunLoadingAnimationProps> = ({
           </div>
 
           {/* Holographic scan lines */}
-          <div className="absolute inset-0 opacity-20 pointer-events-none"
+          <div className="absolute inset-0 opacity-10 pointer-events-none"
                style={{
-                 backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 4px)',
+                 backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(59,130,246,0.1) 2px, rgba(59,130,246,0.1) 4px)',
                  animation: 'scan-lines 8s linear infinite'
                }} />
 
@@ -145,19 +145,19 @@ export const FunLoadingAnimation: React.FC<FunLoadingAnimationProps> = ({
               {/* Outer prismatic ring */}
               <div className="absolute -inset-2 rounded-full"
                    style={{ 
-                     background: 'conic-gradient(from 0deg, #ff0080, #ff8c00, #40e0d0, #7b68ee, #ff1493, #ff0080)',
+                     background: 'conic-gradient(from 0deg, #3b82f6, #06b6d4, #60a5fa, #0891b2, #2563eb, #3b82f6)',
                      animation: 'spin 6s linear infinite',
                      filter: 'blur(4px)',
-                     opacity: 0.7
+                     opacity: 0.5
                    }} />
               
               {/* Main holographic ring */}
               <div className="absolute inset-0 rounded-full"
                    style={{ 
-                     background: 'conic-gradient(from 0deg, #06b6d4, #8b5cf6, #ec4899, #f59e0b, #10b981, #06b6d4)',
+                     background: 'conic-gradient(from 0deg, #3b82f6, #06b6d4, #60a5fa, #22d3ee, #2563eb, #3b82f6)',
                      animation: 'spin 4s linear infinite',
                    }}>
-                <div className="absolute inset-1 rounded-full bg-gradient-to-br from-slate-900 via-purple-900/80 to-slate-900" />
+                <div className="absolute inset-1 rounded-full bg-gradient-to-br from-white via-blue-50 to-cyan-50" />
               </div>
               
               {/* Rotating energy rings */}
@@ -175,12 +175,12 @@ export const FunLoadingAnimation: React.FC<FunLoadingAnimationProps> = ({
                 />
               ))}
               
-              {/* Pulsing core with rainbow gradient */}
+              {/* Pulsing core with blue gradient */}
               <div className="absolute inset-8 rounded-full"
                    style={{ 
-                     background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(139,92,246,0.8) 50%, rgba(236,72,153,0.6) 100%)',
+                     background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(59,130,246,0.8) 50%, rgba(6,182,212,0.6) 100%)',
                      animation: 'pulse-glow 2s ease-in-out infinite',
-                     boxShadow: '0 0 40px rgba(139,92,246,0.8), 0 0 60px rgba(236,72,153,0.6), inset 0 0 30px rgba(255,255,255,0.5)'
+                     boxShadow: '0 0 40px rgba(59,130,246,0.8), 0 0 60px rgba(6,182,212,0.6), inset 0 0 30px rgba(255,255,255,0.5)'
                    }} />
               
               {/* Orbiting holo-dots */}
@@ -203,17 +203,17 @@ export const FunLoadingAnimation: React.FC<FunLoadingAnimationProps> = ({
           </div>
         </div>
         
-        {/* Holographic text with prismatic effect */}
+        {/* Holographic text with blue gradient effect */}
         <div className="absolute bottom-6 left-0 right-0 text-center px-4">
           <div className={`${currentSize.text} font-black uppercase transition-all duration-500 ${isFading ? 'opacity-0 translate-y-3 scale-95 blur-sm' : 'opacity-100 translate-y-0 scale-100 blur-0'}`}
                style={{ 
-                 background: 'linear-gradient(90deg, #06b6d4, #8b5cf6, #ec4899, #f59e0b, #10b981, #06b6d4)',
+                 background: 'linear-gradient(90deg, #3b82f6, #06b6d4, #2563eb, #0891b2, #60a5fa, #3b82f6)',
                  backgroundSize: '200% auto',
                  WebkitBackgroundClip: 'text',
                  WebkitTextFillColor: 'transparent',
                  backgroundClip: 'text',
                  animation: 'gradient-flow 3s linear infinite',
-                 textShadow: '0 0 30px rgba(139,92,246,0.5)',
+                 textShadow: '0 0 30px rgba(59,130,246,0.5)',
                  letterSpacing: '0.15em',
                  fontWeight: 900
                }}>
@@ -658,7 +658,7 @@ export const FunLoadingAnimation: React.FC<FunLoadingAnimationProps> = ({
 
     glass: (
       <div className={`relative ${currentSize.container} ${className}`}>
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 rounded-3xl overflow-hidden shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-100 rounded-3xl overflow-hidden shadow-2xl">
           {/* Enhanced glassmorphism layers */}
           <div className="absolute inset-4 rounded-2xl backdrop-blur-3xl bg-white/50 border-2 border-white/70 shadow-xl"
                style={{ 
@@ -666,20 +666,20 @@ export const FunLoadingAnimation: React.FC<FunLoadingAnimationProps> = ({
                }}>
             {/* Enhanced floating gradient orbs */}
             <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute w-28 h-28 bg-gradient-to-br from-blue-400/40 to-purple-400/40 rounded-full blur-2xl"
+              <div className="absolute w-28 h-28 bg-gradient-to-br from-blue-400/40 to-cyan-400/40 rounded-full blur-2xl"
                    style={{ 
                      top: '15%', 
                      left: '10%',
                      animation: 'float-smooth 8s ease-in-out infinite'
                    }} />
-              <div className="absolute w-24 h-24 bg-gradient-to-br from-pink-400/40 to-orange-400/40 rounded-full blur-2xl"
+              <div className="absolute w-24 h-24 bg-gradient-to-br from-cyan-400/40 to-blue-500/40 rounded-full blur-2xl"
                    style={{ 
                      bottom: '20%', 
                      right: '15%',
                      animation: 'float-smooth 7s ease-in-out infinite',
                      animationDelay: '2s'
                    }} />
-              <div className="absolute w-20 h-20 bg-gradient-to-br from-purple-400/40 to-cyan-400/40 rounded-full blur-2xl"
+              <div className="absolute w-20 h-20 bg-gradient-to-br from-blue-500/40 to-cyan-500/40 rounded-full blur-2xl"
                    style={{ 
                      top: '50%', 
                      left: '50%',
@@ -701,7 +701,7 @@ export const FunLoadingAnimation: React.FC<FunLoadingAnimationProps> = ({
                 </div>
                 
                 {/* Inner glass layer */}
-                <div className="absolute inset-5 rounded-full backdrop-blur-md bg-gradient-to-br from-blue-200/60 via-purple-200/60 to-pink-200/60 border border-white/60"
+                <div className="absolute inset-5 rounded-full backdrop-blur-md bg-gradient-to-br from-blue-200/60 via-cyan-200/60 to-blue-300/60 border border-white/60"
                      style={{ 
                        animation: 'pulse-gentle 2s ease-in-out infinite',
                        boxShadow: 'inset 0 2px 10px rgba(255,255,255,0.5)'
@@ -711,14 +711,14 @@ export const FunLoadingAnimation: React.FC<FunLoadingAnimationProps> = ({
                 <div className="absolute inset-8 rounded-full bg-gradient-to-br from-white to-blue-100"
                      style={{ 
                        animation: 'pulse-gentle 1.5s ease-in-out infinite',
-                       boxShadow: '0 0 25px rgba(139, 92, 246, 0.5)'
+                       boxShadow: '0 0 25px rgba(59, 130, 246, 0.5)'
                      }} />
               </div>
             </div>
             
             {/* Enhanced frosted text */}
             <div className="absolute bottom-8 left-0 right-0 text-center px-4">
-              <div className={`${currentSize.text} font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent transition-all duration-500 ${isFading ? 'opacity-0 scale-90 blur-md' : 'opacity-100 scale-100 blur-0'}`}
+              <div className={`${currentSize.text} font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 bg-clip-text text-transparent transition-all duration-500 ${isFading ? 'opacity-0 scale-90 blur-md' : 'opacity-100 scale-100 blur-0'}`}
                    style={{ 
                      letterSpacing: '0.08em',
                      fontWeight: 700

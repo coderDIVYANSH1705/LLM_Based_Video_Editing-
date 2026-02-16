@@ -58,17 +58,17 @@ export default function ThumbnailGallery({ thumbnails }: ThumbnailGalleryProps) 
   return (
     <div className="relative group">
       {/* Glow Effect */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 to-purple-600 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
+      <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
       
-      <div className="relative bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-white/10 p-6">
+      <div className="relative bg-white backdrop-blur-xl rounded-2xl border border-blue-200 p-6 shadow-lg">
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg">
+          <div className="p-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
             <Image className="h-5 w-5 text-white" />
           </div>
           <div>
-            <h3 className="text-lg font-bold text-white">AI Thumbnail Suggestions</h3>
-            <p className="text-sm text-slate-400">
+            <h3 className="text-lg font-bold text-blue-900">AI Thumbnail Suggestions</h3>
+            <p className="text-sm text-blue-600">
               {thumbnails.length} eye-catching frames selected from your video
             </p>
           </div>
@@ -122,11 +122,11 @@ export default function ThumbnailGallery({ thumbnails }: ThumbnailGalleryProps) 
           </div>
 
           {/* Reasoning */}
-          <div className="mt-4 p-4 bg-white/5 rounded-lg border border-white/10">
+          <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
             <div className="flex items-start gap-2">
-              <Sparkles className="h-5 w-5 text-purple-400 flex-shrink-0 mt-0.5" />
+              <Sparkles className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-sm text-blue-900 leading-relaxed">
                   {selectedThumbnail.reasoning}
                 </p>
                 
@@ -172,8 +172,8 @@ export default function ThumbnailGallery({ thumbnails }: ThumbnailGalleryProps) 
               onClick={() => setSelectedIndex(index)}
               className={`relative aspect-video rounded-lg overflow-hidden border-2 transition-all ${
                 selectedIndex === index
-                  ? 'border-purple-500 ring-2 ring-purple-500/50 scale-105'
-                  : 'border-white/10 hover:border-white/30 hover:scale-105'
+                  ? 'border-blue-500 ring-2 ring-blue-500/50 scale-105'
+                  : 'border-blue-200 hover:border-blue-400 hover:scale-105'
               }`}
             >
               {/* Recommended Star */}
@@ -213,7 +213,7 @@ export default function ThumbnailGallery({ thumbnails }: ThumbnailGalleryProps) 
                 setTimeout(() => handleDownload(thumbnail, index), index * 100)
               })
             }}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 rounded-lg font-medium text-white transition-all shadow-lg hover:shadow-xl"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-lg font-medium text-white transition-all shadow-lg hover:shadow-xl"
           >
             <Download className="h-5 w-5" />
             <span>Download All Thumbnails</span>
